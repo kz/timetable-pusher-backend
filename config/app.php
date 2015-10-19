@@ -145,6 +145,8 @@ return [
         TimeTablePusher\Providers\EventServiceProvider::class,
         TimeTablePusher\Providers\RouteServiceProvider::class,
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
     ],
 
     /*
