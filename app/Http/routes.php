@@ -12,5 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
+});
+
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('login', 'SessionController@create');
+        Route::post('login', 'SessionController@store');
+        Route::get('register', 'UserController@create');
+        Route::post('register', 'UserController@store');
+    });
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('logout', 'SessionController@destroy');
+    });
 });
