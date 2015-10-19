@@ -26,3 +26,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('logout', 'SessionController@destroy');
     });
 });
+
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
+    Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
+        Route::get('timelines', 'TimelineController@index');
+
+        Route::post('pins', 'PinController@store');
+        Route::delete('pins', 'PinController@destroy');
+    });
+});
