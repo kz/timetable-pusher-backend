@@ -10,7 +10,7 @@
             <div class="card white black-text">
                 <div class="card-content black-text">
                     <span class="card-title black-text">API Token</span>
-                    <input value="00000000000000000000" type="text">
+                    <input value="{{ $apiToken }}" type="text">
 
                     <p>Copy and paste the above token into the Pebble app's configuration page. This will allow the
                         watchapp to access your account.
