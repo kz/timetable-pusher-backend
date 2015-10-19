@@ -11,8 +11,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+    AuthorizableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -37,14 +37,18 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function timetables()
+    {
+        return $this->hasMany('TimetablePusher\Timetable');
+    }
+
     public static function boot()
     {
         parent::boot();
 
-        static::creating(function($model)
-        {
+        static::creating(function ($model) {
             // Ensure a unique API token is generated
-            while (True) {
+            while (true) {
                 $apiToken = strtoupper(str_random(20));
                 if (\DB::table('users')->where('api_token', $apiToken)->count() > 0) {
                     continue;

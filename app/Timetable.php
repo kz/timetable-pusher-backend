@@ -10,4 +10,9 @@ class Timetable extends Model
     {
         return $this->hasMany('TimetablePusher\Job');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('TimetablePusher\User');
+    }
 }
