@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">About Timetable Pusher</h5>
+                <h5>About Timetable Pusher</h5>
 
                 <p class="grey-text text-lighten-4">Timetable Pusher is a Pebble app which pushes your whole weekly
                     timetable schedule to your Pebble watch.</p>

@@ -1,6 +1,7 @@
 html {
-    /* Override the default background color */
-    background-color: #333; !important;
+    /* Override default colors */
+    background-color: #333 !important;
+    color: white !important;
 }
 
 #download-button {

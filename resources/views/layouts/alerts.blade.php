@@ -1,7 +1,7 @@
 @if (count($errors) > 0)
     @foreach ($errors->all() as $error)
-        <div class="card red">
-            <div class="card-content"><span class="white-text">{{ $error }}</span></div>
-        </div>
+        <ul class="collection red" style="border:0 !important; margin-bottom: 5px !important;">
+            <li class="collection-item red">{{ $error }}</li>
+        </ul>
     @endforeach
 @endif
