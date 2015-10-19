@@ -11,8 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
+/*
+ * Standard Routes
+ */
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', function () {
+        return view('homepage');
+    });
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 /*
