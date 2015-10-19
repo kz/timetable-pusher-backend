@@ -14,6 +14,10 @@ class CreatePinsTable extends Migration
     {
         Schema::create('pins', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('job_id')->unsigned();
+            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->string('pin_id')->unique();
+            $table->string('time');
             $table->timestamps();
         });
     }

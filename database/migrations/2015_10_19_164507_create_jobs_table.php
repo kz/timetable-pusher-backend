@@ -14,7 +14,15 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('status', [
+                'created',
+                'in_progress',
+                'failed'
+            ]);
+            $table->integer('timetable_id')->unsigned();
+            $table->foreign('timetable_id')->references('id')->on('timetables');
             $table->timestamps();
+            $table->dateTime('ended_at')->nullable();
         });
     }
 
