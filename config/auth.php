@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => TimeTablePusher\User::class,
+    'model' => TimetablePusher\User::class,
 
     /*
     |--------------------------------------------------------------------------

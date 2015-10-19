@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Http\Controllers;
+namespace TimetablePusher\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

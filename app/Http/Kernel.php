@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Http;
+namespace TimetablePusher\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \TimeTablePusher\Http\Middleware\EncryptCookies::class,
+        \TimetablePusher\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \TimeTablePusher\Http\Middleware\VerifyCsrfToken::class,
+        \TimetablePusher\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \TimeTablePusher\Http\Middleware\Authenticate::class,
+        'auth' => \TimetablePusher\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \TimeTablePusher\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \TimetablePusher\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

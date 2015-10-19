@@ -1,8 +1,8 @@
 <?php
 
-namespace TimeTablePusher\Http\Controllers\Auth;
+namespace TimetablePusher\Http\Controllers\Auth;
 
-use TimeTablePusher\Http\Controllers\Controller;
+use TimetablePusher\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

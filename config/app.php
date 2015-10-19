@@ -140,10 +140,10 @@ return [
         /*
          * Application Service Providers...
          */
-        TimeTablePusher\Providers\AppServiceProvider::class,
-        TimeTablePusher\Providers\AuthServiceProvider::class,
-        TimeTablePusher\Providers\EventServiceProvider::class,
-        TimeTablePusher\Providers\RouteServiceProvider::class,
+        TimetablePusher\Providers\AppServiceProvider::class,
+        TimetablePusher\Providers\AuthServiceProvider::class,
+        TimetablePusher\Providers\EventServiceProvider::class,
+        TimetablePusher\Providers\RouteServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 

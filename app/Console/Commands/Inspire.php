@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Console\Commands;
+namespace TimetablePusher\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

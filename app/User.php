@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher;
+namespace TimetablePusher;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

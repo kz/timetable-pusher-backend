@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Events;
+namespace TimetablePusher\Events;
 
 abstract class Event
 {

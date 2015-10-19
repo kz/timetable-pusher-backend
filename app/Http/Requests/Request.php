@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Http\Requests;
+namespace TimetablePusher\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

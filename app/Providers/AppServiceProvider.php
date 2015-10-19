@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Providers;
+namespace TimetablePusher\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

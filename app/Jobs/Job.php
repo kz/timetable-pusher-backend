@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Jobs;
+namespace TimetablePusher\Jobs;
 
 use Illuminate\Bus\Queueable;
 

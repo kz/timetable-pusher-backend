@@ -20,7 +20,7 @@
             "database"
         ],
         "psr-4": {
-            "TimeTablePusher\\": "app/"
+            "TimetablePusher\\": "app/"
         }
     },
     "autoload-dev": {

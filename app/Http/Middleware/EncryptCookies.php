@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Http\Middleware;
+namespace TimetablePusher\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => TimeTablePusher\User::class,
+        'model'  => TimetablePusher\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

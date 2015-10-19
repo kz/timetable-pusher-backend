@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Http\Middleware;
+namespace TimetablePusher\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

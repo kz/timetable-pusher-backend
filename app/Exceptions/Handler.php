@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Exceptions;
+namespace TimetablePusher\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeTablePusher\Providers;
+namespace TimetablePusher\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'TimeTablePusher\Events\SomeEvent' => [
-            'TimeTablePusher\Listeners\EventListener',
+        'TimetablePusher\Events\SomeEvent' => [
+            'TimetablePusher\Listeners\EventListener',
         ],
     ];
 

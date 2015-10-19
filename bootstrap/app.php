@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    TimeTablePusher\Http\Kernel::class
+    TimetablePusher\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    TimeTablePusher\Console\Kernel::class
+    TimetablePusher\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    TimeTablePusher\Exceptions\Handler::class
+    TimetablePusher\Exceptions\Handler::class
 );
 
 /*
