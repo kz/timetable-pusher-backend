@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+/*
+ * Authentication Routes
+ */
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('login', 'AuthController@getLogin');
@@ -27,6 +30,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     });
 });
 
+/*
+ * API Routes
+ */
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
         Route::get('timelines', 'TimelineController@index');

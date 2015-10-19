@@ -1,45 +1,24 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
+@section('content')
+    <div class="section no-pad-bot" id="index-banner">
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
+            <br><br>
+
+            <h1 class="header center white-text">Class Timetables on your Wrist</h1>
+
+            <div class="row center">
+                <h5 class="header col s12 white-text light">Timetable Pusher is a Pebble app which pushes your whole
+                    week's timetable to your watch.</h5>
             </div>
+            <div class="row center">
+                <a href="#" id="download-button"
+                   class="btn-large waves-effect waves-light red">1. Download the App</a>
+                <a href="/dashboard" id="download-button"
+                   class="btn-large waves-effect waves-light red">2. Configure your Timetable</a>
+            </div>
+            <br><br>
+
         </div>
-    </body>
-</html>
+    </div>
+@endsection
