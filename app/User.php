@@ -36,4 +36,25 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model)
+        {
+            // Ensure a unique API token is generated
+            while (True) {
+                $apiToken = strtoupper(str_random(20));
+                if (\DB::table('users')->where('api_token', $apiToken)->count() > 0) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
+
+            /** @noinspection PhpUndefinedVariableInspection */
+            $model->api_token = $apiToken;
+        });
+    }
 }

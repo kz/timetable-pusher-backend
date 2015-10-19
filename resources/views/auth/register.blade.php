@@ -4,7 +4,7 @@
     <div class="container">
         @include('layouts.alerts')
 
-        <h1 class="header">Log In</h1>
+        <h1 class="header">Register</h1>
 
         <form method="POST" action="/auth/register" class="col s12">
             {!! csrf_field() !!}
