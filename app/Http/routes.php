@@ -17,13 +17,13 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::group(['middleware' => 'guest'], function () {
-        Route::get('login', 'SessionController@create');
-        Route::post('login', 'SessionController@store');
-        Route::get('register', 'UserController@create');
-        Route::post('register', 'UserController@store');
+        Route::get('login', 'AuthController@getLogin');
+        Route::post('login', 'AuthController@postLogin');
+        Route::get('register', 'AuthController@getRegister');
+        Route::post('register', 'AuthController@postRegister');
     });
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('logout', 'SessionController@destroy');
+        Route::post('logout', 'AuthController@getLogout');
     });
 });
 
