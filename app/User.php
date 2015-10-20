@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use TimetablePusher\TimetablePusher\Token;
 
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
@@ -48,14 +49,8 @@ class User extends Model implements AuthenticatableContract,
 
         static::creating(function ($model) {
             // Ensure a unique API token is generated
-            while (true) {
-                $apiToken = strtoupper(str_random(20));
-                if (\DB::table('users')->where('api_token', $apiToken)->count() > 0) {
-                    continue;
-                } else {
-                    break;
-                }
-            }
+            $token = new Token();
+            $apiToken = $token->generateUnique();
 
             /** @noinspection PhpUndefinedVariableInspection */
             $model->api_token = $apiToken;
