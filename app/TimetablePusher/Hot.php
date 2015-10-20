@@ -49,6 +49,7 @@ class Hot
                     $row[$this->endTimeColumnNum])
             ) {
                 $errors[] = "The submitted timetable is invalid. Ensure that all start and end times are in 'HH:MM' format.";
+                break;
             }
         }
 
@@ -57,6 +58,7 @@ class Hot
             $row = $this->hotFormatArray[$rowNum];
             if ($row[$this->periodColumnNum] !== ($rowNum / 2 + 1)) {
                 $errors[] = "The submitted timetable is invalid. [Period numbers invalid]";
+                break;
             }
         }
 
@@ -67,6 +69,7 @@ class Hot
             for ($columnNum = $this->mondayColumnNum; $columnNum < $this->mondayColumnNum + 7; $columnNum++) {
                 if (strlen($row[$columnNum]) > 0 && strlen($previousRow[$columnNum]) === 0) {
                     $errors[] = "If you enter the location of a lesson, you must enter the name.";
+                    break 2;
                 }
             }
         }
