@@ -158,6 +158,6 @@ class TimetableController extends Controller
 
         $timetable->delete();
 
-        return redirect('/dashboard')->with(['success' => ['The timetable has successfully been deleted.']]);
+        return redirect('/dashboard')->with(['success' => ['Your timetable has successfully been deleted.']]);
     }
 }
