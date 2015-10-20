@@ -39,7 +39,7 @@ class Hot
             $errors[] = "Only a maximum of {$this->maxPeriodsAllowed} periods are allowed.";
         }
 
-        // Ensure time is in valid HH:MM format
+        // Ensure time is in valid HH:MM format and ensure time is in correct order
         $timeRegex = "/^(2[0-3]|[01][0-9]):([0-5][0-9])$/";
 
         for ($rowNum = 0; $rowNum < $rowCount; $rowNum += 2) {
@@ -50,6 +50,11 @@ class Hot
             ) {
                 $errors[] = "The submitted timetable is invalid. Ensure that all start and end times are in 'HH:MM' format.";
                 break;
+            } elseif (intval(preg_replace("/[^0-9]/", "",
+                    $row[$this->startTimeColumnNum])) > intval(preg_replace("/[^0-9]/", "",
+                    $row[$this->endTimeColumnNum]))
+            ) {
+                $errors[] = "The submitted timetable is invalid. Ensure that all end times are later than start times.";
             }
         }
 
@@ -92,7 +97,7 @@ class Hot
 
         $hotFormatRowCount = count($this->hotFormatArray);
 
-        for($rowNum = 0; $rowNum < $hotFormatRowCount; $rowNum += 2) {
+        for ($rowNum = 0; $rowNum < $hotFormatRowCount; $rowNum += 2) {
             $viewableRow = [];
 
             $currentRow = $this->hotFormatArray[$rowNum];
@@ -103,8 +108,8 @@ class Hot
             // Times
             $viewableRow[] = e($currentRow[$this->startTimeColumnNum]) . ' -<br />' . e($currentRow[$this->endTimeColumnNum]);
             // Monday to Sunday
-            for($columnNum = $this->mondayColumnNum; $columnNum < $this->mondayColumnNum + 7; $columnNum++) {
-                if($currentRow[$columnNum] !== "") {
+            for ($columnNum = $this->mondayColumnNum; $columnNum < $this->mondayColumnNum + 7; $columnNum++) {
+                if ($currentRow[$columnNum] !== "") {
                     $viewableRow[] = e($currentRow[$columnNum]) . '<br />' . e($nextRow[$columnNum]);
                 } else {
                     $viewableRow[] = "";
