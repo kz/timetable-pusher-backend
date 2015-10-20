@@ -1,12 +1,14 @@
+var mainHot;
+
 function generateTimetable() {
     /*
      * Get number of lessons, generate input
      */
     var lessons = parseInt(document.getElementById('lessons').value);
-    if (typeof lessons !== 'number') {
+    if (typeof lessons !== 'number' || isNaN(lessons)) {
         alert('You must specify a valid number.');
         return false;
-    } else if (!(0 < lessons <= 10)) {
+    } else if (lessons < 1 || lessons > 10) {
         alert('You can only specify up to 10 lessons per day.');
         return false;
     }
@@ -43,6 +45,7 @@ function generateTimetable() {
         colWidths: 100,
         stretchH: true
     });
+    mainHot = hot;
 
     function notEditableRenderer(instance, td, row, col, prop, value, cellProperties) {
         td.style.background = '#EEE';
@@ -73,5 +76,13 @@ function generateTimetable() {
 }
 
 function submitForm() {
+    if ($("#name").prop('value').length < 1) {
+        alert('You must specify a name for your timetable.');
+        return false;
+    }
 
+    var hotData = JSON.stringify(mainHot.getData());
+    $('#hotData').val(hotData);
+
+    $('#create').submit();
 }

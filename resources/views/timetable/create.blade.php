@@ -30,7 +30,9 @@
             <div class="row">
                 <div class="card-panel black-text">
                     <p>Modify your lesson times and fill in the names and locations of your classes below.
-                    <br /> All fields are optional, so leave fields blank if you don't have classes (e.g., Sunday).</p>
+                        <br/> All fields are optional, so leave fields blank if you don't have classes (e.g., Sunday).
+                    </p>
+
                     <div id="handsontable-container"></div>
                     <p>Make sure you save your timetable below!</p>
                 </div>
@@ -38,10 +40,15 @@
 
             <div class="row">
                 <div class="card-panel black-text">
-                    <p>Name your timetable below:
-                        <input placeholder="Name (e.g., Week A)" name="name" id="name" type="text" class="validate"/>
-                    </p>
-                    <button class="waves-effect waves-light btn" onclick="generateTimetable()"
+                    <form id="create" method="POST" action="/timetable/create">
+                        {!! csrf_field() !!}
+                        <p>Name your timetable below:
+                            <input placeholder="Name (e.g., Week A)" name="name" id="name" type="text"
+                                   class="validate"/>
+                        </p>
+                        <input type="hidden" id="hotData" name="hotData" value=""/>
+                    </form>
+                    <button class="waves-effect waves-light btn" onclick="submitForm()"
                             id="generate-timetable-button">Save Timetable
                     </button>
                 </div>
