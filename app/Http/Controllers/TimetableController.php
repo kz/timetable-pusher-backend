@@ -3,6 +3,7 @@
 namespace TimetablePusher\Http\Controllers;
 
 use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
@@ -60,7 +61,17 @@ class TimetableController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $timetable = Timetable::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        if ($timetable->user_id !== Auth::user()->id) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        return view('timetable.show')->with(compact('timetable'));
     }
 
     /**
@@ -94,6 +105,18 @@ class TimetableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $timetable = Timetable::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        if ($timetable->user_id !== Auth::user()->id) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        $timetable->delete();
+
+        return redirect('/dashboard')->with(['success' => ['The timetable has successfully been deleted.']]);
     }
 }
