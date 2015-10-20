@@ -43,10 +43,10 @@
                     <form id="create" method="POST" action="/timetable/create">
                         {!! csrf_field() !!}
                         <p>Name your timetable below:
-                            <input placeholder="Name (e.g., Week A)" name="name" id="name" type="text"
+                            <input placeholder="Name (e.g., Week A)" name="name" id="name" value="{{ old('name') }}" type="text"
                                    class="validate"/>
                         </p>
-                        <input type="hidden" id="hotData" name="hotData" value=""/>
+                        <input type="hidden" id="hotData" name="hotData" value="{{ old('hotData') }}"/>
                     </form>
                     <button class="waves-effect waves-light btn" onclick="submitForm()"
                             id="generate-timetable-button">Save Timetable

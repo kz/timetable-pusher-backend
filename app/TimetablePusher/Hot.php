@@ -26,19 +26,21 @@ class Hot
 
     public function validateHotFormatData()
     {
+        $errors = [];
+
         $rowCount = count($this->hotFormatArray);
         // Ensure that there are an even number of rows
         if ($rowCount % 2 !== 0) {
-            return "The submitted timetable is invalid. [Row count is odd]";
+            $errors[] = "The submitted timetable is invalid. [Row count is odd]";
         }
 
         // Ensure that there is an allowed number of lessons
-        if ($rowCount > $this->maxPeriodsAllowed) {
-            return "Only a maximum of {$this->maxPeriodsAllowed} periods are allowed.";
+        if ($rowCount / 2 > $this->maxPeriodsAllowed) {
+            $errors[] = "Only a maximum of {$this->maxPeriodsAllowed} periods are allowed.";
         }
 
         // Ensure time is in valid HH:MM format
-        $timeRegex = "/(2[0-3]|[01][0-9]):([0-5][0-9])/";
+        $timeRegex = "/^(2[0-3]|[01][0-9]):([0-5][0-9])$/";
 
         for ($rowNum = 0; $rowNum < $rowCount; $rowNum += 2) {
             $row = $this->hotFormatArray[$rowNum];
@@ -46,7 +48,7 @@ class Hot
             if (!preg_match($timeRegex, $row[$this->startTimeColumnNum]) || !preg_match($timeRegex,
                     $row[$this->endTimeColumnNum])
             ) {
-                return "The submitted timetable is invalid. Ensure that all start and end times are in 'HH:MM' format.";
+                $errors[] = "The submitted timetable is invalid. Ensure that all start and end times are in 'HH:MM' format.";
             }
         }
 
@@ -54,7 +56,7 @@ class Hot
         for ($rowNum = 0; $rowNum < $rowCount; $rowNum += 2) {
             $row = $this->hotFormatArray[$rowNum];
             if ($row[$this->periodColumnNum] !== ($rowNum / 2 + 1)) {
-                return "The submitted timetable is invalid. [Period numbers invalid]";
+                $errors[] = "The submitted timetable is invalid. [Period numbers invalid]";
             }
         }
 
@@ -64,9 +66,13 @@ class Hot
             $previousRow = $this->hotFormatArray[$rowNum - 1];
             for ($columnNum = $this->mondayColumnNum; $columnNum < $this->mondayColumnNum + 7; $columnNum++) {
                 if (strlen($row[$columnNum]) > 0 && strlen($previousRow[$columnNum]) === 0) {
-                    return "If you enter the location of a lesson, you must enter the name.";
+                    $errors[] = "If you enter the location of a lesson, you must enter the name.";
                 }
             }
+        }
+
+        if (count($errors) !== 0) {
+            return $errors;
         }
 
         return true;

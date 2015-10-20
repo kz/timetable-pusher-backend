@@ -5,8 +5,8 @@ $(function() {
      * Use old data if data has been passed back
      */
     var hotData = $('#hotData');
-    if (hotData.prop('value') == "" || typeof hotData.prop('value') == 'undefined') {
-        createHot(JSON.parse(hotData));
+    if (typeof hotData.prop('value') !== 'undefined' && hotData.prop('value') != "") {
+        createHot(JSON.parse(hotData.prop('value')));
     }
 });
 

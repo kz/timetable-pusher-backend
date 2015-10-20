@@ -28,8 +28,20 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:1',
+            'hotData' => 'required'
+        ]);
+
         $hot = new Hot();
         $hot->parseHotFormatJson($request->input('hotData'));
+
+        $hotValidator = $hot->validateHotFormatData();
+        if ($hotValidator !== true) {
+            return redirect()->back()->withInput()->withErrors($hotValidator);
+        }
+
+        return "All's well!";
     }
 
     /**
