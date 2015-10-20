@@ -6,17 +6,8 @@ use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
 
-class TimelineController extends Controller
+class TimetableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +16,7 @@ class TimelineController extends Controller
      */
     public function create()
     {
-        //
+        return view('timetable.create');
     }
 
     /**

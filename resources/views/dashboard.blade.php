@@ -34,7 +34,7 @@
                     <p>You don't have any timetables yet. Why not create one?</p>
                 </div>
                 <div class="card-action">
-                    <a href="/timeline/create"><button class="waves-effect waves-light green btn">New Timetable</button></a>
+                    <a href="/timetable/create"><button class="waves-effect waves-light green btn">New Timetable</button></a>
                 </div>
             </div>
         </div>

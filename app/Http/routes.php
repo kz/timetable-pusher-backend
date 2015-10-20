@@ -28,11 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('token/regenerate', 'TokenController@update');
 
-    Route::get('timeline/create', 'TimelineController@create');
-    Route::post('timeline/create', 'TimelineController@store');
-    Route::get('timeline/{id}/edit', 'TimelineController@edit');
-    Route::post('timeline/{id}', 'TimelineController@update');
-    Route::post('timeline/{id}/{delete}', 'TimelineController@destroy');
+    Route::get('timetable/create', 'TimetableController@create');
+    Route::post('timetable/create', 'TimetableController@store');
+    Route::get('timetable/{id}/edit', 'TimetableController@edit');
+    Route::post('timetable/{id}', 'TimetableController@update');
+    Route::post('timetable/{id}/{delete}', 'TimetableController@destroy');
 });
 
 /*
