@@ -2,9 +2,11 @@
 
 namespace TimetablePusher\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
+use TimetablePusher\Timetable;
 use TimetablePusher\TimetablePusher\Hot;
 
 class TimetableController extends Controller
@@ -41,7 +43,13 @@ class TimetableController extends Controller
             return redirect()->back()->withInput()->withErrors($hotValidator);
         }
 
-        return "All's well!";
+        $timetable = new Timetable();
+        $timetable->user_id = Auth::user()->id;
+        $timetable->name = $request->input('name');
+        $timetable->data = $hot->stringifyHotFormatData();
+        $timetable->save();
+
+        redirect('/dashboard')->with(['success' => ['Your timetable has successfully been created.']]);
     }
 
     /**

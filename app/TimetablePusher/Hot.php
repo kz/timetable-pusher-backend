@@ -78,4 +78,9 @@ class Hot
         return true;
     }
 
+    public function stringifyHotFormatData()
+    {
+        return json_encode($this->hotFormatArray);
+    }
+
 }
