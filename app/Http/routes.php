@@ -26,7 +26,13 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('dashboard', 'DashboardController@show');
 
-    Route::post('/token/regenerate', 'TokenController@regenerate');
+    Route::post('token/regenerate', 'TokenController@regenerate');
+
+    Route::get('timeline/create', 'TimelineController@create');
+    Route::post('timeline/create', 'TimelineController@store');
+    Route::get('timeline/{id}/edit', 'TimelineController@edit');
+    Route::post('timeline/{id}', 'TimelineController@update');
+    Route::post('timeline/{id}/{delete}', 'TimelineController@destroy');
 });
 
 /*
