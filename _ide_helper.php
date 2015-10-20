@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.20 (LTS) on 2015-10-19.
+ * Generated for Laravel 5.1.20 (LTS) on 2015-10-20.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1091,7 +1091,7 @@ namespace {
          */
         public static function handle($input, $output = null){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \TimeTablePusher\Console\Kernel::handle($input, $output);
+            return \TimetablePusher\Console\Kernel::handle($input, $output);
         }
         
         /**
@@ -1104,7 +1104,7 @@ namespace {
          */
         public static function terminate($input, $status){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \TimeTablePusher\Console\Kernel::terminate($input, $status);
+            \TimetablePusher\Console\Kernel::terminate($input, $status);
         }
         
         /**
@@ -1117,7 +1117,7 @@ namespace {
          */
         public static function call($command, $parameters = array()){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \TimeTablePusher\Console\Kernel::call($command, $parameters);
+            return \TimetablePusher\Console\Kernel::call($command, $parameters);
         }
         
         /**
@@ -1130,7 +1130,7 @@ namespace {
          */
         public static function queue($command, $parameters = array()){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \TimeTablePusher\Console\Kernel::queue($command, $parameters);
+            \TimetablePusher\Console\Kernel::queue($command, $parameters);
         }
         
         /**
@@ -1141,7 +1141,7 @@ namespace {
          */
         public static function all(){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \TimeTablePusher\Console\Kernel::all();
+            return \TimetablePusher\Console\Kernel::all();
         }
         
         /**
@@ -1152,7 +1152,7 @@ namespace {
          */
         public static function output(){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \TimeTablePusher\Console\Kernel::output();
+            return \TimetablePusher\Console\Kernel::output();
         }
         
         /**
@@ -1163,7 +1163,7 @@ namespace {
          */
         public static function bootstrap(){
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \TimeTablePusher\Console\Kernel::bootstrap();
+            \TimetablePusher\Console\Kernel::bootstrap();
         }
         
     }
@@ -1271,7 +1271,7 @@ namespace {
         /**
          * Get the currently authenticated user.
          *
-         * @return \TimeTablePusher\User|null 
+         * @return \TimetablePusher\User|null 
          * @static 
          */
         public static function user(){
@@ -1373,7 +1373,7 @@ namespace {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \TimeTablePusher\User 
+         * @return \TimetablePusher\User 
          * @static 
          */
         public static function loginUsingId($id, $remember = false){
@@ -1478,7 +1478,7 @@ namespace {
         /**
          * Return the currently cached user.
          *
-         * @return \TimeTablePusher\User|null 
+         * @return \TimetablePusher\User|null 
          * @static 
          */
         public static function getUser(){
@@ -1520,7 +1520,7 @@ namespace {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \TimeTablePusher\User 
+         * @return \TimetablePusher\User 
          * @static 
          */
         public static function getLastAttempted(){
