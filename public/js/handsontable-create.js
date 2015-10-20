@@ -64,7 +64,8 @@ function createHot(data) {
      */
     var hot = new Handsontable(container, {
         data: data,
-        minSpareRows: 1,
+        minSpareRows: 0,
+        minSpareColumns: 0,
         rowHeaders: false,
         colHeaders: ["Period", "Start Time", "End Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         contextMenu: false,
