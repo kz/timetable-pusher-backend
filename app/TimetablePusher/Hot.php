@@ -86,4 +86,35 @@ class Hot
         return json_encode($this->hotFormatArray);
     }
 
+    public function outputViewableFormat()
+    {
+        $viewableRows = [];
+
+        $hotFormatRowCount = count($this->hotFormatArray);
+
+        for($rowNum = 0; $rowNum < $hotFormatRowCount; $rowNum += 2) {
+            $viewableRow = [];
+
+            $currentRow = $this->hotFormatArray[$rowNum];
+            $nextRow = $this->hotFormatArray[$rowNum + 1];
+
+            // Period
+            $viewableRow[] = e($currentRow[$this->periodColumnNum]);
+            // Times
+            $viewableRow[] = e($currentRow[$this->startTimeColumnNum]) . ' -<br />' . e($currentRow[$this->endTimeColumnNum]);
+            // Monday to Sunday
+            for($columnNum = $this->mondayColumnNum; $columnNum < $this->mondayColumnNum + 7; $columnNum++) {
+                if($currentRow[$columnNum] !== "") {
+                    $viewableRow[] = e($currentRow[$columnNum]) . '<br />' . e($nextRow[$columnNum]);
+                } else {
+                    $viewableRow[] = "";
+                }
+            }
+
+            $viewableRows[] = $viewableRow;
+        }
+
+        return $viewableRows;
+    }
+
 }

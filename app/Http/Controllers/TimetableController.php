@@ -71,7 +71,11 @@ class TimetableController extends Controller
             return redirect('/dashboard')->withErrors('Timetable not found.');
         }
 
-        return view('timetable.show')->with(compact('timetable'));
+        $hot = new Hot();
+        $hot->parseHotFormatJson($timetable->data);
+        $rows = $hot->outputViewableFormat();
+
+        return view('timetable.show')->with(compact('timetable', 'rows'));
     }
 
     /**
