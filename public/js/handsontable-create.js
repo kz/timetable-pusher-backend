@@ -1,5 +1,15 @@
 var mainHot;
 
+$(function() {
+    /*
+     * Use old data if data has been passed back
+     */
+    var hotData = $('#hotData');
+    if (hotData.prop('value') == "" || typeof hotData.prop('value') == 'undefined') {
+        createHot(JSON.parse(hotData));
+    }
+});
+
 function generateTimetable() {
     /*
      * Get number of lessons, generate input
@@ -22,6 +32,22 @@ function generateTimetable() {
         data.push(["", "", "", "", "", "", "", "", "", ""]);
     }
 
+    createHot(data);
+}
+
+function submitForm() {
+    if ($("#name").prop('value').length < 1) {
+        alert('You must specify a name for your timetable.');
+        return false;
+    }
+
+    var hotData = JSON.stringify(mainHot.getData());
+    $('#hotData').val(hotData);
+
+    $('#create').submit();
+}
+
+function createHot(data) {
     /*
      * Update UI
      */
@@ -73,16 +99,4 @@ function generateTimetable() {
             return cellProperties;
         }
     });
-}
-
-function submitForm() {
-    if ($("#name").prop('value').length < 1) {
-        alert('You must specify a name for your timetable.');
-        return false;
-    }
-
-    var hotData = JSON.stringify(mainHot.getData());
-    $('#hotData').val(hotData);
-
-    $('#create').submit();
 }

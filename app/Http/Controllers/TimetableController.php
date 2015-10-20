@@ -5,6 +5,7 @@ namespace TimetablePusher\Http\Controllers;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
+use TimetablePusher\TimetablePusher\Hot;
 
 class TimetableController extends Controller
 {
@@ -27,7 +28,8 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hot = new Hot();
+        $hot->parseHotFormatJson($request->input('hotData'));
     }
 
     /**
