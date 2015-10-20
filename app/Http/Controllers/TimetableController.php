@@ -50,7 +50,7 @@ class TimetableController extends Controller
         $timetable->data = $hot->stringifyHotFormatData();
         $timetable->save();
 
-        return redirect('/timetables/' . $timetable->id)->with(['success' => ['Your timetable has successfully been created.']]);
+        return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been created.']]);
     }
 
     /**
@@ -82,7 +82,17 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $timetable = Timetable::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        if ($timetable->user_id !== Auth::user()->id) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        return view('timetable.edit')->with(compact('timetable'));
     }
 
     /**
@@ -94,7 +104,34 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $timetable = Timetable::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        if ($timetable->user_id !== Auth::user()->id) {
+            return redirect('/dashboard')->withErrors('Timetable not found.');
+        }
+
+        $this->validate($request, [
+            'name' => 'required|min:1',
+            'hotData' => 'required'
+        ]);
+
+        $hot = new Hot();
+        $hot->parseHotFormatJson($request->input('hotData'));
+
+        $hotValidator = $hot->validateHotFormatData();
+        if ($hotValidator !== true) {
+            return redirect()->back()->withInput()->withErrors($hotValidator);
+        }
+
+        $timetable->name = $request->input('name');
+        $timetable->data = $hot->stringifyHotFormatData();
+        $timetable->update();
+
+        return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been updated.']]);
     }
 
     /**
