@@ -31,6 +31,8 @@
                 <div class="card-panel black-text">
                     <p>Modify your lesson times and fill in the names and locations of your classes below.
                         <br/> All fields are optional, so leave fields blank if you don't have classes (e.g., Sunday).
+                        <br/><strong>Tip:</strong> Type your timetable into a spreadsheet, save it somewhere safe and
+                        paste your lessons here to prevent data loss!
                     </p>
 
                     <div id="handsontable-container"></div>
@@ -43,7 +45,8 @@
                     <form id="create" method="POST" action="/timetable/create">
                         {!! csrf_field() !!}
                         <p>Name your timetable below:
-                            <input placeholder="Name (e.g., Week A)" name="name" id="name" value="{{ old('name') }}" type="text"
+                            <input placeholder="Name (e.g., Week A)" name="name" id="name" value="{{ old('name') }}"
+                                   type="text"
                                    class="validate"/>
                         </p>
                         <input type="hidden" id="hotData" name="hotData" value="{{ old('hotData') }}"/>
