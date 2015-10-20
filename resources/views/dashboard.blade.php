@@ -18,10 +18,11 @@
                 </div>
                 <div class="card-action">
                     <div class="right-align">
-                    <form method="POST" action="/token/regenerate">
-                        {!! csrf_field() !!}
-                        <button type="submit" class="waves-effect waves-light red darken-2 btn">Regenerate Token</button>
-                    </form>
+                        <form method="POST" action="/token/regenerate">
+                            {!! csrf_field() !!}
+                            <button type="submit" class="waves-effect waves-light red darken-2 btn">Regenerate Token
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -31,10 +32,31 @@
             <div class="card white black-text">
                 <div class="card-content black-text">
                     <span class="card-title black-text">Timetables</span>
-                    <p>You don't have any timetables yet. Why not create one?</p>
+                    @if (count($timetables) === 0)
+                        <p>You don't have any timetables yet. Why not create one?</p>
+                    @else
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($timetables as $timetable)
+                                    <tr>
+                                        <td>{{ $timetable->name }}</td>
+                                        <td><a href="/timetable/{{ $timetable->id }}">View</a> | <a href="/timetable/{{ $timetable->id }}/edit">Edit</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
                 <div class="card-action">
-                    <a href="/timetable/create"><button class="waves-effect waves-light green btn">New Timetable</button></a>
+                    <a href="/timetable/create">
+                        <button class="waves-effect waves-light green btn">New Timetable</button>
+                    </a>
                 </div>
             </div>
         </div>

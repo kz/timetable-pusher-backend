@@ -22,6 +22,6 @@ class DashboardController extends Controller
         $apiToken = $user->api_token;
         $timetables = $user->timetables;
 
-        return view('dashboard', compact('apiToken'));
+        return view('dashboard', compact('apiToken', 'timetables'));
     }
 }

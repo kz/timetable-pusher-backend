@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('timetable/create', 'TimetableController@create');
     Route::post('timetable/create', 'TimetableController@store');
+    Route::get('timetable/{id}', 'TimetableController@show');
     Route::get('timetable/{id}/edit', 'TimetableController@edit');
     Route::post('timetable/{id}', 'TimetableController@update');
     Route::post('timetable/{id}/{delete}', 'TimetableController@destroy');
