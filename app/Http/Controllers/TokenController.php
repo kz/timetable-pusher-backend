@@ -26,6 +26,6 @@ class TokenController extends Controller
         $user->api_token = $apiToken;
         $user->update();
 
-        return redirect('dashboard')->with('success', 'Your API token has been regenerated.');
+        return redirect('dashboard')->with('success', ['Your API token has been regenerated.']);
     }
 }
