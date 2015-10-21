@@ -32,7 +32,7 @@ class Hot
         $rowCount = count($this->hotFormatArray);
         // Ensure that there are an even number of rows
         if ($rowCount % 2 !== 0) {
-            $errors[] = "The submitted timetable is invalid. [Row count is odd]";
+            $errors[] = "The submitted timetable is invalid. [Invalid row count]";
         }
 
         // Ensure that there is an allowed number of lessons
@@ -70,7 +70,7 @@ class Hot
         for ($rowNum = 0; $rowNum < $rowCount; $rowNum += 2) {
             $row = $this->hotFormatArray[$rowNum];
             if ($row[$this->periodColumnNum] !== ($rowNum / 2 + 1)) {
-                $errors[] = "The submitted timetable is invalid. [Period numbers invalid]";
+                $errors[] = "The submitted timetable is invalid. [Invalid period numbers]";
                 break;
             }
         }

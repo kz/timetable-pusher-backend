@@ -38,6 +38,8 @@ function createHot(data) {
         colHeaders: ["Period", "Start Time", "End Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         contextMenu: false,
         colWidths: 100,
+        maxCols: 10,
+        maxRows: data.length * 2,
         stretchH: true
     });
     mainHot = hot;
