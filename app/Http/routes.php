@@ -68,7 +68,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
          * POST job/
          * [x-www-form-urlencoded]
          * timetable_id
-         * offset_from_utc (seconds)
+         * offset_from_utc (minutes)
          * week [current|next]
          * day (optional) [0 - 6, 0 = Monday, 6 = Sunday]
          */

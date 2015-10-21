@@ -149,8 +149,6 @@ class Hot
     {
         $hotFormat = $this->hotFormatArray; // $hotFormat[period][day]
 
-        $carbon = $weekBeginning;
-
         $days = [];
 
         // Add days
@@ -171,14 +169,19 @@ class Hot
                 $hotEndTime = $hotFormat[$periodNum][$this->endTimeColumnNum];
                 $hotLocation = $hotFormat[$periodNum + 1][$dayNum];
 
+                $startTime = Carbon::parse($hotStartTime);
+                $endTime = Carbon::parse($hotEndTime);
+                $carbon = $weekBeginning->copy();
+
                 $lessonDateTime = $carbon->addDays($dayNum - $this->mondayColumnNum)
-                    ->addSeconds((strtotime($hotStartTime) - strtotime("00:00")))
+                    ->hour($startTime->hour)
+                    ->minute($startTime->minute)
                     ->addMinutes($offsetFromUTC);
 
                 $day[] = [
                     'id' => '',
                     'time' => $lessonDateTime->format('Y-m-d\TH:i:s\Z'),
-                    'duration' => abs($hotEndTime - $hotStartTime) / 60,
+                    'duration' => $startTime->diffInMinutes($endTime),
                     'layout' => [
                         'type' => 'calendarPin',
                         'title' => $hotPeriod . ' - ' . $hotName,
