@@ -20,20 +20,20 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $timetableToken;
+    protected $timelineToken;
     protected $pin;
     protected $jobId;
 
     /**
      * Create a new job instance.
      *
-     * @param $timetableToken
+     * @param $timelineToken
      * @param $pin
      * @param $jobId
      */
-    public function __construct($timetableToken, $pin, $jobId)
+    public function __construct($timelineToken, $pin, $jobId)
     {
-        $this->timetableToken = $timetableToken;
+        $this->timelineToken = $timelineToken;
         $this->pin = $pin;
         $this->jobId = $jobId;
     }
@@ -60,7 +60,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
             $response = $client->put($dbPin->pin_id, [
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'X-User-Token' => $this->timetableToken,
+                    'X-User-Token' => $this->timelineToken,
                 ],
                 'json' => $this->pin['id'],
             ]);

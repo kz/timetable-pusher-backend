@@ -20,7 +20,8 @@ class CreatePinsTable extends Migration
             $table->enum('status', [
                 'in_progress',
                 'successful',
-                'failed'
+                'failed',
+                'deleted'
             ]);
             $table->integer('status_code');
             $table->string('response');

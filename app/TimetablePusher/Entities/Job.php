@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\Job wherePinsSent($value)
  * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\Job whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\Job whereUpdatedAt($value)
+ * @property string $type
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\Job whereType($value)
  */
 class Job extends Model
 {

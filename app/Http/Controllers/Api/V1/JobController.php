@@ -4,6 +4,7 @@ namespace TimetablePusher\Http\Controllers\Api\V1;
 
 use Auth;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
@@ -83,7 +84,7 @@ class JobController extends Controller
         }
 
         $job = new Job();
-        $job->pushPins($timetable->id, request()->input('timetable_token'), $pins);
+        $job->pushPins($timetable->id, request()->input('timeline_token'), $pins);
 
         return response()->json('All pins sent.', 200);
     }
@@ -91,11 +92,30 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // Validate API input
+        $validator = Validator::make($request->all(), [
+            'timeline_token' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true, 'messages' => $validator->messages()], 400);
+        }
+
+        // Retrieve all successful pins up to the past week
+        $pins = DB::table('pins')->where('user_id', Auth::user()->id)
+            ->where('status', 'successful')
+            ->where('time', '>', Carbon::now()->subDays(3))
+            ->get();
+
+        $job = new Job();
+        $job->deletePins(request()->input('timeline_token'), $pins);
+
+        return response()->json('Deletion request sent.', 200);
     }
 }

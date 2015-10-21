@@ -14,6 +14,11 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('type',
+                [
+                    'create',
+                    'delete',
+                ]);
             $table->integer('timetable_id')->unsigned();
             $table->foreign('timetable_id')->references('id')->on('timetables');
             $table->integer('pins_sent')->nullable();
