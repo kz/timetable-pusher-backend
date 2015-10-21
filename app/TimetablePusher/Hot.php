@@ -145,11 +145,11 @@ class Hot
         return $viewableRows;
     }
 
-    public function outputHotFormatToPinFormat($weekBeginning = "1970-01-01", $offsetFromUTC = 0)
+    public function outputHotFormatToPinFormat(Carbon $weekBeginning, $offsetFromUTC = 0)
     {
         $hotFormat = $this->hotFormatArray; // $hotFormat[period][day]
 
-        $carbon = new Carbon($weekBeginning, 'UTC');
+        $carbon = $weekBeginning;
 
         $days = [];
 
@@ -159,10 +159,16 @@ class Hot
 
             // Add periods
             for ($periodNum = 0; $periodNum < count($hotFormat); $periodNum += 2) {
+                $hotName = $hotFormat[$periodNum][$dayNum];
+
+                // Skip empty periods
+                if (str_replace(' ', '', $hotName) == "") {
+                    continue;
+                }
+
                 $hotPeriod = $hotFormat[$periodNum][$this->periodColumnNum];
                 $hotStartTime = $hotFormat[$periodNum][$this->startTimeColumnNum];
                 $hotEndTime = $hotFormat[$periodNum][$this->endTimeColumnNum];
-                $hotName = $hotFormat[$periodNum][$dayNum];
                 $hotLocation = $hotFormat[$periodNum + 1][$dayNum];
 
                 $lessonDateTime = $carbon->addDays($dayNum - $this->mondayColumnNum)

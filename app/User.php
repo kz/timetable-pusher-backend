@@ -64,6 +64,10 @@ class User extends Model implements AuthenticatableContract,
 
     public static function authenticateApiV1($token)
     {
+        // Get plain token
+        $token = str_replace('Bearer:', '', $token);
+        $token = str_replace(' ', '', $token);
+
         $query = \DB::table('users')->where('api_token', $token);
         if ($query->count() === 1) {
             return $query->first()->id;
