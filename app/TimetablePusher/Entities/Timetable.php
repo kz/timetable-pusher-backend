@@ -3,6 +3,7 @@
 namespace TimetablePusher\TimetablePusher\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * TimetablePusher\TimetablePusher\Entities\Timetable
@@ -24,6 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Timetable extends Model
 {
+
+    use SoftDeletes;
+
     public function jobs()
     {
         return $this->hasMany('TimetablePusher\TimetablePusher\Entities\Job');
@@ -40,4 +44,11 @@ class Timetable extends Model
      * @var array
      */
     protected $visible = ['id', 'name'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

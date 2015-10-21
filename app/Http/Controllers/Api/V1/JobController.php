@@ -108,10 +108,13 @@ class JobController extends Controller
         }
 
         // Retrieve all successful pins up to the past week
-        $pins = DB::table('pins')->where('user_id', Auth::user()->id)
-            ->where('status', 'successful')
-            ->where('time', '>', Carbon::now()->subDays(3))
-            ->get();
+        $jobs = DB::table('jobs')->where('user_id', Auth::user()->id)->get(['id']);
+        foreach($jobs as $job) {
+            $pins = DB::table('pins')->where('job_id', $job->id)
+                ->where('status', 'successful')
+                ->where('time', '>', Carbon::now()->subDays(3))
+                ->get();
+        }
 
         $job = new Job();
         $job->deletePins(request()->input('timeline_token'), $pins);

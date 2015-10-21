@@ -18,6 +18,7 @@ class CreateTimetablesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->text('data');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace TimetablePusher\TimetablePusher;
 
+use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use TimetablePusher\Jobs\DeletePin;
@@ -27,6 +28,7 @@ class Job
         }
 
         $job = new Entities\Job();
+        $job->user_id = Auth::user()->id;
         $job->type = 'create';
         $job->timetable_id = $timetable->id;
         $job->save();
@@ -46,15 +48,14 @@ class Job
     public function deletePins($timelineToken, $pins)
     {
         $job = new Entities\Job();
-        $job->type = 'create';
-        $job->timetable_id = $timetable->id;
+        $job->type = 'delete';
         $job->save();
 
         $job->pins_sent = 0;
 
         foreach ($pins as $pin) {
             $job->pins_sent += 1;
-            $this->dispatch(new DeletePin($timelinneToken, $pin));
+            $this->dispatch(new DeletePin($timelineToken, $pin->id));
         }
 
         $job->update();

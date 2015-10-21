@@ -22,7 +22,7 @@
                 </p>
 
                 <div id="handsontable-container"></div>
-                <p>Make sure you save your stimetable below!</p>
+                <p>Make sure you save your timetable below!</p>
             </div>
         </div>
 
