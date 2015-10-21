@@ -2,6 +2,7 @@
 
 namespace TimetablePusher\Http\Controllers\Api\V1;
 
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
 use TimetablePusher\Timetable;
 use TimetablePusher\TimetablePusher\Hot;
+use TimetablePusher\TimetablePusher\PinFormatter;
 use Validator;
 
 class JobController extends Controller
@@ -22,6 +24,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate API input
         $validator = Validator::make($request->all(), [
             'timetable_id' => 'required|integer',
             'offset_from_utc' => 'required|integer',
@@ -33,24 +36,51 @@ class JobController extends Controller
             return response()->json(['error' => true, 'messages' => $validator->messages()], 400);
         }
 
+        // Retrieve timetable, ensuring it belongs to the user
         try {
             $timetable = Timetable::findOrFail($request->input('timetable_id'));
+            if ($timetable->user->id !== Auth::user()->id) {
+                throw new ModelNotFoundException;
+            }
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => true, 'messages' => ['timetable' => 'Timetable not found.']], 404);
         }
 
+        // Get user's week
         $nowInUTC = Carbon::now('UTC')
             ->addMinutes($request->input('offset_from_utc'));
         if ($request->input('week') === 'current') {
-            $weekBeginning = $nowInUTC->startOfWeek();
+            $weekBeginning = $nowInUTC->copy()->startOfWeek();
         } else {
-            $weekBeginning = $nowInUTC->addWeek()->startOfWeek();
+            $weekBeginning = $nowInUTC->copy()->addWeek()->startOfWeek();
         }
 
+        // Ensure the day requested is not prior to user's current day
+        if ($request->input('week') === 'current' && $request->has('day')) {
+            $dayOfWeek = $nowInUTC->dayOfWeek === 0 ? 6 : $nowInUTC->dayOfWeek - 1;
+            if ($request->input('day') < $dayOfWeek) {
+                return response()->json(['error' => 'true', 'messages' => ['day' => 'Cannot retrieve previous day.']], 403);
+            }
+        }
+
+        // Create pins
         $hot = new Hot();
         $hot->parseJson($timetable->data);
-        $output = $hot->outputHotFormatToPinFormat($weekBeginning, $request->input('offset_from_utc'));
+        $pins = $hot->outputHotFormatToPinFormat($weekBeginning, $request->input('offset_from_utc'));
 
+        $pinFormatter = new PinFormatter($pins);
+
+        // Remove unnecessary pins if current week requested
+        if ($request->input('week') === 'current') {
+            $pins = $pinFormatter->removePinsOlderThanCurrentDay();
+        }
+
+        // Retrieve pins for specified day only
+        if ($request->has('day')) {
+            $pins = $pinFormatter->retrievePinsForDay($request->input('day'));
+        }
+
+        return response()->json($pins);
     }
 
     /**

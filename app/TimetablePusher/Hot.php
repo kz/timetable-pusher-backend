@@ -145,6 +145,11 @@ class Hot
         return $viewableRows;
     }
 
+    /**
+     * @param Carbon $weekBeginning
+     * @param int $offsetFromUTC
+     * @return array
+     */
     public function outputHotFormatToPinFormat(Carbon $weekBeginning, $offsetFromUTC = 0)
     {
         $hotFormat = $this->hotFormatArray; // $hotFormat[period][day]
@@ -195,4 +200,5 @@ class Hot
 
         return $days;
     }
+
 }
