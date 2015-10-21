@@ -68,9 +68,9 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
          * POST job/
          * [x-www-form-urlencoded]
          * timetable_id
-         * timezone_offset (seconds)
-         * week [current|last]
-         * day (optional) [monday|tuesday|etc.]
+         * offset_from_utc (seconds)
+         * week [current|next]
+         * day (optional) [0 - 6, 0 = Monday, 6 = Sunday]
          */
         Route::post('job/create', 'JobController@store');
 
