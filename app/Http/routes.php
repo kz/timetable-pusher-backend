@@ -72,12 +72,12 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
          * week [current|last]
          * day (optional) [monday|tuesday|etc.]
          */
-        Route::post('job/create', 'PinController@store');
+        Route::post('job/create', 'JobController@store');
 
         /*
          * DELETE job/
          * [Deletes all pins from two days in the past]
          */
-        Route::delete('job', 'PinController@destroy');
+        Route::delete('job', 'JobController@destroy');
     });
 });
