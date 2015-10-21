@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
 
-class TimelineController extends Controller
+class TimetableController extends Controller
 {
     /**
      * Display a listing of the resource.

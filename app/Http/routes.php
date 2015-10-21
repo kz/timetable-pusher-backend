@@ -62,7 +62,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
         /*
          * GET timeline/
          */
-        Route::get('timeline', 'TimelineController@index');
+        Route::get('timetable', 'TimetableController@index');
 
         /*
          * POST job/
