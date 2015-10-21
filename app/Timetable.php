@@ -33,4 +33,11 @@ class Timetable extends Model
     {
         return $this->belongsTo('TimetablePusher\User');
     }
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'name'];
 }

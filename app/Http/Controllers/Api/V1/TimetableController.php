@@ -2,9 +2,11 @@
 
 namespace TimetablePusher\Http\Controllers\Api\V1;
 
+use Auth;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
+use TimetablePusher\Timetable;
 
 class TimetableController extends Controller
 {
@@ -15,7 +17,7 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        //
+        return Timetable::whereUserId(Auth::user()->id)->get();
     }
 
     /**
@@ -31,7 +33,7 @@ class TimetableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +44,7 @@ class TimetableController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +55,7 @@ class TimetableController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +66,8 @@ class TimetableController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +78,7 @@ class TimetableController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
