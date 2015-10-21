@@ -1,6 +1,6 @@
 <?php
 
-namespace TimetablePusher;
+namespace TimetablePusher\TimetablePusher\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

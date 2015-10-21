@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
-use TimetablePusher\Timetable;
+use TimetablePusher\TimetablePusher\Entities\Timetable;
 use TimetablePusher\TimetablePusher\Hot;
 
 class TimetableController extends Controller

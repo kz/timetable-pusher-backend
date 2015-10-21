@@ -4,7 +4,7 @@ namespace TimetablePusher\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use TimetablePusher\User;
+use TimetablePusher\TimetablePusher\Entities\User;
 
 class AuthenticateApiV1
 {

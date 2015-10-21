@@ -2,7 +2,7 @@
 
 namespace TimetablePusher\Http\Controllers\Auth;
 
-use TimetablePusher\User;
+use TimetablePusher\TimetablePusher\Entities\User;
 use Validator;
 use TimetablePusher\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

@@ -68,6 +68,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
          * POST job/
          * [x-www-form-urlencoded]
          * timetable_id
+         * timeline_token
          * offset_from_utc (minutes)
          * week [current|next]
          * day (optional) [0 - 6, 0 = Monday, 6 = Sunday]
@@ -77,6 +78,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
         /*
          * DELETE job/
          * [Deletes all pins from two days in the past]
+         * [x-www-form-urlencoded]
+         * timeline_token
          */
         Route::delete('job', 'JobController@destroy');
     });

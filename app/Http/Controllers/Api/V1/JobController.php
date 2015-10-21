@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
-use TimetablePusher\Timetable;
+use TimetablePusher\TimetablePusher\Entities\Timetable;
 use TimetablePusher\TimetablePusher\Hot;
 use TimetablePusher\TimetablePusher\PinFormatter;
 use Validator;
@@ -27,6 +27,7 @@ class JobController extends Controller
         // Validate API input
         $validator = Validator::make($request->all(), [
             'timetable_id' => 'required|integer',
+            'timeline_token' => 'required|string',
             'offset_from_utc' => 'required|integer',
             'week' => 'required|string|in:current,next',
             'day' => 'sometimes|integer|min:0|max:6'
@@ -80,7 +81,7 @@ class JobController extends Controller
             $pins = $pinFormatter->retrievePinsForDay($request->input('day'));
         }
 
-        return response()->json($pins);
+
     }
 
     /**

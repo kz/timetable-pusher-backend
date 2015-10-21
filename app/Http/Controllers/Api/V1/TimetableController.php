@@ -6,7 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
-use TimetablePusher\Timetable;
+use TimetablePusher\TimetablePusher\Entities\Timetable;
 
 class TimetableController extends Controller
 {
