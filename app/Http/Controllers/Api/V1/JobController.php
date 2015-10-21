@@ -10,6 +10,7 @@ use TimetablePusher\Http\Requests;
 use TimetablePusher\Http\Controllers\Controller;
 use TimetablePusher\TimetablePusher\Entities\Timetable;
 use TimetablePusher\TimetablePusher\Hot;
+use TimetablePusher\TimetablePusher\Job;
 use TimetablePusher\TimetablePusher\PinFormatter;
 use Validator;
 
@@ -80,6 +81,9 @@ class JobController extends Controller
         if ($request->has('day')) {
             $pins = $pinFormatter->retrievePinsForDay($request->input('day'));
         }
+
+        $job = new Job();
+        $job->pushPins($timetable->id, request()->input('timetable_token'), $pins);
 
 
     }

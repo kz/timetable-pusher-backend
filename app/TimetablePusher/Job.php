@@ -3,16 +3,21 @@
 namespace TimetablePusher\TimetablePusher;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use TimetablePusher\Jobs\PushPin;
 use TimetablePusher\TimetablePusher\Entities\Timetable;
 
 class Job
 {
+
+    use DispatchesJobs;
+
     public function __construct()
     {
 
     }
 
-    public function createPins($timetableId, $timetableToken, $pins)
+    public function pushPins($timetableId, $timetableToken, $pins)
     {
         try {
             $timetable = Timetable::findOrFail($timetableId);
@@ -29,12 +34,10 @@ class Job
         foreach($pins as $pinDay) {
             foreach($pinDay as $pin) {
                 $job->pin_count += 1;
-
-
+                $this->dispatch(new PushPin($timetableToken, $pin, $job->id));
             }
         }
 
         $job->update();
-
     }
 }

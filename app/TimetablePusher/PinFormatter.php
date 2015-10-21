@@ -49,7 +49,7 @@ class PinFormatter
      */
     public function retrievePinsForDay($day)
     {
-        $pins = $this->pins[$day];
+        $pins[] = $this->pins[$day];
         $this->pins = $pins;
 
         return $pins;

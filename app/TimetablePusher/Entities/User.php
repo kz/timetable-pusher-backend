@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use TimetablePusher\TimetablePusher\Token;
 
 /**
- * TimetablePusher\User
+ * TimetablePusher\TimetablePusher\Entities\User
  *
  * @property integer $id
  * @property string $email
@@ -21,14 +21,14 @@ use TimetablePusher\TimetablePusher\Token;
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\TimetablePusher\Timetable[] $timetables
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereApiToken($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\TimetablePusher\TimetablePusher\Entities\Timetable[] $timetables
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereApiToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\TimetablePusher\TimetablePusher\Entities\User whereUpdatedAt($value)
  */
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
@@ -59,7 +59,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function timetables()
     {
-        return $this->hasMany('TimetablePusher\Timetable');
+        return $this->hasMany('TimetablePusher\TimetablePusher\Entities\Timetable');
     }
 
     public static function authenticateApiV1($token)
@@ -85,7 +85,7 @@ class User extends Model implements AuthenticatableContract,
             $token = new Token();
             $apiToken = $token->generateUnique();
 
-            /** @noinspection PhpUndefinedVariableInspection */
+
             $model->api_token = $apiToken;
         });
     }
