@@ -72,7 +72,8 @@ function createHot(data) {
         colWidths: 100,
         maxCols: 10,
         maxRows: data.length * 2,
-        stretchH: true
+        stretchH: true,
+        fillHandle: false
     });
     mainHot = hot;
 

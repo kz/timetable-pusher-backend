@@ -86,7 +86,7 @@ class Hot
         // Ensure that period numbers have not been modified
         for ($rowNum = 0; $rowNum < $rowCount; $rowNum += 2) {
             $row = $this->hotFormatArray[$rowNum];
-            if ($row[$this->periodColumnNum] !== ($rowNum / 2 + 1)) {
+            if ($row[$this->periodColumnNum] != ($rowNum / 2 + 1)) {
                 $errors[] = "The submitted timetable is invalid. [Invalid period numbers]";
                 break;
             }
