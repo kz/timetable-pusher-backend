@@ -85,7 +85,7 @@ class JobController extends Controller
         $job = new Job();
         $job->pushPins($timetable->id, request()->input('timetable_token'), $pins);
 
-
+        return response()->json('All pins sent.', 200);
     }
 
     /**

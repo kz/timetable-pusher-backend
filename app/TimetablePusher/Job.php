@@ -29,11 +29,11 @@ class Job
         $job->timetable_id = $timetable->id;
         $job->save();
 
-        $job->pin_count = 0;
+        $job->pins_sent = 0;
 
         foreach($pins as $pinDay) {
             foreach($pinDay as $pin) {
-                $job->pin_count += 1;
+                $job->pins_sent += 1;
                 $this->dispatch(new PushPin($timetableToken, $pin, $job->id));
             }
         }
