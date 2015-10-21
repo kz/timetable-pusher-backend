@@ -62,6 +62,16 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('TimetablePusher\Timetable');
     }
 
+    public static function authenticateApiV1($token)
+    {
+        $query = \DB::table('users')->where('api_token', $token);
+        if ($query->count() === 1) {
+            return $query->first()->id;
+        } else {
+            return false;
+        }
+    }
+
     public static function boot()
     {
         parent::boot();

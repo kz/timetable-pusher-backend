@@ -28,6 +28,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \TimetablePusher\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.api.v1' => \TimetablePusher\Http\Middleware\AuthenticateApiV1::class,
         'guest' => \TimetablePusher\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }
