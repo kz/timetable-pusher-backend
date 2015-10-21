@@ -41,7 +41,7 @@ class AuthenticateApiV1
         if ($userId = $this->user->authenticateApiV1($request->header('Authorization')) !== false) {
             $this->auth->loginUsingId($userId);
         } else {
-            return response('Unauthorized.', 401);
+            return response('Invalid API token.', 401);
         }
 
         return $next($request);

@@ -12,7 +12,7 @@
 */
 
 /*
- * Standard Routes
+ * Web Routes
  */
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {
@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /*
- * Authentication Routes
+ * Web Authentication Routes
  */
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::group(['middleware' => 'guest'], function () {
@@ -55,10 +55,29 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
  * API Routes
  */
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
-    Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
-        Route::get('timelines', 'TimelineController@index');
+    /*
+     * Authorization: Bearer [TOKEN]
+     */
+    Route::group(['prefix' => 'v1', 'namespace' => 'V1', 'middleware' => 'auth.api.v1'], function () {
+        /*
+         * GET timeline/
+         */
+        Route::get('timeline', 'TimelineController@index');
 
-        Route::post('pins', 'PinController@store');
-        Route::delete('pins', 'PinController@destroy');
+        /*
+         * POST job/
+         * [x-www-form-urlencoded]
+         * timetable_id
+         * timezone_offset (seconds)
+         * week [current|last]
+         * day (optional) [monday|tuesday|etc.]
+         */
+        Route::post('job/create', 'PinController@store');
+
+        /*
+         * DELETE job/
+         * [Deletes all pins from two days in the past]
+         */
+        Route::delete('job', 'PinController@destroy');
     });
 });
