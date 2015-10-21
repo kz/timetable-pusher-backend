@@ -11,6 +11,7 @@ class Hot
     protected $startTimeColumnNum = 1;
     protected $endTimeColumnNum = 2;
     protected $mondayColumnNum = 3;
+    protected $totalColumnCount = 10;
 
     protected $maxPeriodsAllowed = 10;
 
@@ -55,7 +56,14 @@ class Hot
                     $row[$this->endTimeColumnNum]))
             ) {
                 $errors[] = "The submitted timetable is invalid. Ensure that all end times are later than start times.";
+                break;
             }
+        }
+
+        // Ensure that columns have not been modified
+        $firstRow = $this->hotFormatArray[0];
+        if (count($firstRow) !== $this->totalColumnCount) {
+            $errors[] = "The submitted timetable is invalid. [Invalid column count]";
         }
 
         // Ensure that period numbers have not been modified
