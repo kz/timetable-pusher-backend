@@ -2,6 +2,9 @@
 
 namespace TimetablePusher\TimetablePusher;
 
+use Carbon\Carbon;
+use DateTime;
+
 class Hot
 {
 
@@ -20,11 +23,25 @@ class Hot
         //
     }
 
-    public function parseHotFormatJson($json)
+    /**
+     * @param $json
+     */
+    public function parseJson($json)
     {
         $this->hotFormatArray = json_decode($json);
     }
 
+    /**
+     * @return string
+     */
+    public function stringifyHotFormatArray()
+    {
+        return json_encode($this->hotFormatArray);
+    }
+
+    /**
+     * @return array|bool
+     */
     public function validateHotFormatData()
     {
         $errors = [];
@@ -94,12 +111,10 @@ class Hot
         return true;
     }
 
-    public function stringifyHotFormatData()
-    {
-        return json_encode($this->hotFormatArray);
-    }
-
-    public function outputViewableFormat()
+    /**
+     * @return array
+     */
+    public function outputHotFormatToWebFormat()
     {
         $viewableRows = [];
 
@@ -130,4 +145,45 @@ class Hot
         return $viewableRows;
     }
 
+    public function outputHotFormatToPinFormat($weekBeginning = "1970-01-01", $offsetFromUTC = 0)
+    {
+        $hotFormat = $this->hotFormatArray; // $hotFormat[period][day]
+
+        $carbon = new Carbon($weekBeginning, 'UTC');
+
+        $days = [];
+
+        // Add days
+        for ($dayNum = $this->mondayColumnNum; $dayNum < $this->mondayColumnNum + 7; $dayNum++) {
+            $day = [];
+
+            // Add periods
+            for ($periodNum = 0; $periodNum < count($hotFormat); $periodNum += 2) {
+                $hotPeriod = $hotFormat[$periodNum][$this->periodColumnNum];
+                $hotStartTime = $hotFormat[$periodNum][$this->startTimeColumnNum];
+                $hotEndTime = $hotFormat[$periodNum][$this->endTimeColumnNum];
+                $hotName = $hotFormat[$periodNum][$dayNum];
+                $hotLocation = $hotFormat[$periodNum + 1][$dayNum];
+
+                $lessonDateTime = $carbon->addDays($dayNum - $this->mondayColumnNum)
+                    ->addSeconds((strtotime($hotStartTime) - strtotime("00:00")))
+                    ->addMinutes($offsetFromUTC);
+
+                $day[] = [
+                    'id' => '',
+                    'time' => $lessonDateTime->format('Y-m-d\TH:i:s\Z'),
+                    'duration' => abs($hotEndTime - $hotStartTime) / 60,
+                    'layout' => [
+                        'type' => 'calendarPin',
+                        'title' => $hotPeriod . ' - ' . $hotName,
+                        'locationName' => $hotLocation
+                    ]
+                ];
+            }
+
+            $days[] = $day;
+        }
+
+        return $days;
+    }
 }

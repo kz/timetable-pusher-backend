@@ -37,7 +37,7 @@ class TimetableController extends Controller
         ]);
 
         $hot = new Hot();
-        $hot->parseHotFormatJson($request->input('hotData'));
+        $hot->parseJson($request->input('hotData'));
 
         $hotValidator = $hot->validateHotFormatData();
         if ($hotValidator !== true) {
@@ -47,7 +47,7 @@ class TimetableController extends Controller
         $timetable = new Timetable();
         $timetable->user_id = Auth::user()->id;
         $timetable->name = $request->input('name');
-        $timetable->data = $hot->stringifyHotFormatData();
+        $timetable->data = $hot->stringifyHotFormatArray();
         $timetable->save();
 
         return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been created.']]);
@@ -72,8 +72,8 @@ class TimetableController extends Controller
         }
 
         $hot = new Hot();
-        $hot->parseHotFormatJson($timetable->data);
-        $rows = $hot->outputViewableFormat();
+        $hot->parseJson($timetable->data);
+        $rows = $hot->outputHotFormatToWebFormat();
 
         return view('timetable.show')->with(compact('timetable', 'rows'));
     }
@@ -124,7 +124,7 @@ class TimetableController extends Controller
         ]);
 
         $hot = new Hot();
-        $hot->parseHotFormatJson($request->input('hotData'));
+        $hot->parseJson($request->input('hotData'));
 
         $hotValidator = $hot->validateHotFormatData();
         if ($hotValidator !== true) {
@@ -132,7 +132,7 @@ class TimetableController extends Controller
         }
 
         $timetable->name = $request->input('name');
-        $timetable->data = $hot->stringifyHotFormatData();
+        $timetable->data = $hot->stringifyHotFormatArray();
         $timetable->update();
 
         return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been updated.']]);
