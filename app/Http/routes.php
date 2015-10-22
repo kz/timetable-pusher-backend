@@ -47,7 +47,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('register', 'AuthController@postRegister');
     });
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('logout', 'AuthController@getLogout');
+        Route::get('logout', 'AuthController@getLogout');
     });
 });
 

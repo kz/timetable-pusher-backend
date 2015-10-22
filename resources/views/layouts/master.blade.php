@@ -44,8 +44,7 @@
             <div class="col l6 s12">
                 <h5>About Timetable Pusher</h5>
 
-                <p class="grey-text text-lighten-4">Timetable Pusher is a Pebble app which pushes your whole weekly
-                    timetable schedule to your Pebble watch.</p>
+                <p class="grey-text text-lighten-4">Timetable Pusher is a Pebble app which pushes your class timetables to your watch.</p>
             </div>
         </div>
     </div>
