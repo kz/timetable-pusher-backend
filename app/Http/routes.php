@@ -84,3 +84,10 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
         Route::delete('job', 'JobController@destroy');
     });
 });
+
+/*
+ * Config Page Routes
+ */
+Route::get('app/config', function () {
+    return view('config');
+});
