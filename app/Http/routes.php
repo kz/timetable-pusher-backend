@@ -65,7 +65,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
         Route::get('timetable', 'TimetableController@index');
 
         /*
-         * POST job/
+         * POST job/create
          * [x-www-form-urlencoded]
          * timetable_id
          * timeline_token
