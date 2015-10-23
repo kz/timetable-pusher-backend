@@ -109,6 +109,7 @@ class JobController extends Controller
 
         // Retrieve all successful pins up to the past week
         $jobs = DB::table('jobs')->where('user_id', Auth::user()->id)->get(['id']);
+        $pins = [];
         foreach($jobs as $job) {
             $pins = DB::table('pins')->where('job_id', $job->id)
                 ->where('status', 'successful')
