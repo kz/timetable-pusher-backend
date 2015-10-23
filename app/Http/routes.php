@@ -58,7 +58,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     /*
      * Authorization: Bearer [TOKEN]
      */
-    Route::group(['prefix' => 'v1', 'namespace' => 'V1', 'middleware' => 'auth.api.v1'], function () {
+    Route::group(['prefix' => 'v1', 'namespace' => 'V1', 'middleware' => ['auth.api.v1', 'cors']], function () {
         /*
          * GET timeline/
          */

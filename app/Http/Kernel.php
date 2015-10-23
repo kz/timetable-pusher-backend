@@ -30,5 +30,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.api.v1' => \TimetablePusher\Http\Middleware\AuthenticateApiV1::class,
         'guest' => \TimetablePusher\Http\Middleware\RedirectIfAuthenticated::class,
+        'cors' => \TimetablePusher\Http\Middleware\Cors::class,
     ];
 }
