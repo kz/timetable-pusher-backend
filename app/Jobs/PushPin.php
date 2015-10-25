@@ -62,7 +62,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
                     'Content-Type' => 'application/json',
                     'X-User-Token' => $this->timelineToken,
                 ],
-                'json' => $this->pin['id'],
+                'json' => $this->pin,
             ]);
 
             if ($response->getStatusCode() === 200) {
