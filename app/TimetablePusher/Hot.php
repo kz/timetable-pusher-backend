@@ -190,9 +190,12 @@ class Hot
                     'layout' => [
                         'type' => 'calendarPin',
                         'title' => $hotPeriod . ' - ' . $hotName,
-                        'locationName' => $hotLocation
                     ]
                 ];
+
+                if (!empty($hotLocation)) {
+                    $day['layout']['locationName'] = $hotLocation;
+                }
             }
 
             $days[] = $day;
