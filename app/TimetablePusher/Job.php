@@ -36,7 +36,7 @@ class Job
 
         $job->pins_sent = 0;
 
-        Log::info($pins);
+        Log::info(json_encode($pins));
         foreach($pins as $pinDay) {
             foreach($pinDay as $pin) {
                 $job->pins_sent += 1;
