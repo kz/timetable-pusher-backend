@@ -4,17 +4,13 @@ namespace TimetablePusher\Jobs;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TransferException;
-use GuzzleHttp\Middleware;
-use Log;
-use TimetablePusher\Jobs\Job;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Log;
 use TimetablePusher\TimetablePusher\Entities\Pin;
 
 class PushPin extends Job implements SelfHandling, ShouldQueue
@@ -58,21 +54,12 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
 
         $client = new Client(['base_uri' => 'https://timeline-api.getpebble.com/v1/user/pins/']);
 
-        // Grab the client's handler instance.
-        $clientHandler = $client->getConfig('handler');
-        // Create a middleware that echoes parts of the request.
-        $tapMiddleware = Middleware::tap(function ($request) {
-            Bugsnag::notifyError($request->getBody());
-            // {"foo":"bar"}
-        });
-
         try {
             $response = $client->request('PUT', $dbPin->pin_id, [
                 'json' => $this->pin,
                 'headers' => [
                     'X-User-Token' => $this->timelineToken,
                 ],
-                'handler' => $tapMiddleware($clientHandler)
             ]);
 
             if ($response->getStatusCode() === 200) {
@@ -81,9 +68,11 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
                 $dbPin->status = 'failed';
                 Log::error('Pin Failure - ' . $dbPin->id . ' due to ' . $response->getStatusCode() . ' - ' . $response->getBody());
             }
+
             $dbPin->status_code = $response->getStatusCode();
             $dbPin->response = $response->getBody();
             $dbPin->update();
+
         } catch (RequestException $e) {
             $responseCode = $e->getResponse()->getStatusCode();
             $responseBody = $e->getResponse()->getBody();
@@ -92,8 +81,9 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
 
             $dbPin->status = 'failed';
             $dbPin->status_code = $responseCode;
-            $dbPin->response = $responseBody;
+            $dbPin->response = 'RequestException' . $responseBody;
             $dbPin->update();
+
         } catch (TransferException $e) {
             $responseCode = $e->getResponse()->getStatusCode();
             $responseBody = $e->getResponse()->getBody();
@@ -102,7 +92,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
 
             $dbPin->status = 'failed';
             $dbPin->status_code = $responseCode;
-            $dbPin->response = $responseBody;
+            $dbPin->response = 'TransferException' . $responseBody;
             $dbPin->update();
         }
 
