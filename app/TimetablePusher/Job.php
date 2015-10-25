@@ -5,6 +5,7 @@ namespace TimetablePusher\TimetablePusher;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Log;
 use TimetablePusher\Jobs\DeletePin;
 use TimetablePusher\Jobs\PushPin;
 use TimetablePusher\TimetablePusher\Entities\Timetable;
@@ -35,6 +36,7 @@ class Job
 
         $job->pins_sent = 0;
 
+        Log::info($pins);
         foreach($pins as $pinDay) {
             foreach($pinDay as $pin) {
                 $job->pins_sent += 1;
