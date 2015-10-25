@@ -10,7 +10,8 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "~2.3",
         "guzzlehttp/guzzle": "~6.0",
-        "pda/pheanstalk": "~3.0"
+        "pda/pheanstalk": "~3.0",
+        "bugsnag/bugsnag-laravel": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
