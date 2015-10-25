@@ -117,8 +117,15 @@ class JobController extends Controller
                 ->get();
         }
 
+        $allPins = [];
+        foreach($pins as $subpin) {
+            foreach($subpin as $pin) {
+                $allPins[] = $pin;
+            }
+        }
+
         $job = new Job();
-        $job->deletePins(request()->input('timeline_token'), $pins);
+        $job->deletePins(request()->input('timeline_token'), $allPins);
 
         return response()->json('Deletion request sent.', 200);
     }
