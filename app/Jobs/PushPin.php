@@ -62,7 +62,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
         $clientHandler = $client->getConfig('handler');
         // Create a middleware that echoes parts of the request.
         $tapMiddleware = Middleware::tap(function ($request) {
-            Log::error($request->getBody());
+            Bugsnag::notifyError($request->getBody());
             // {"foo":"bar"}
         });
 
