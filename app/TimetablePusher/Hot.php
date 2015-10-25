@@ -194,7 +194,7 @@ class Hot
                 ];
 
                 if (!empty($hotLocation)) {
-                    $day['layout']['locationName'] = $hotLocation;
+                    $day[count($day) - 1]['layout']['locationName'] = $hotLocation;
                 }
             }
 
