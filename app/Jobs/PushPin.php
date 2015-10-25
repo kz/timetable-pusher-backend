@@ -57,12 +57,11 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
 
         $client = new Client(['base_uri' => 'https://timeline-api.getpebble.com/v1/user/pins/']);
         try {
-            $response = $client->put($dbPin->pin_id, [
+            $response = $client->request('PUT', $dbPin->pin_id, [
+                'json' => $this->pin,
                 'headers' => [
-                    'Content-Type' => 'application/json',
                     'X-User-Token' => $this->timelineToken,
                 ],
-                'json' => $this->pin,
             ]);
 
             if ($response->getStatusCode() === 200) {
