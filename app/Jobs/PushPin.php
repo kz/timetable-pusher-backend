@@ -10,7 +10,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Log;
+use Illuminate\Support\Facades\Log;
 use TimetablePusher\TimetablePusher\Entities\Pin;
 
 class PushPin extends Job implements SelfHandling, ShouldQueue
