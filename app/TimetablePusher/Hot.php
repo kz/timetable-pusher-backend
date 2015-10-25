@@ -202,9 +202,6 @@ class Hot
             $days[] = $day;
         }
 
-        Log::info(json_encode($days));
-        die();
-
         return $days;
     }
 

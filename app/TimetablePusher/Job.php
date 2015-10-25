@@ -40,6 +40,8 @@ class Job
         foreach($pins as $pinDay) {
             foreach($pinDay as $pin) {
                 $job->pins_sent += 1;
+                Log::info(json_encode($pin));
+                die();
                 $this->dispatch(new PushPin($timelineToken, $pin, $job->id));
             }
         }
