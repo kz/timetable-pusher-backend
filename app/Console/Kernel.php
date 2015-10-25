@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \TimetablePusher\Console\Commands\Inspire::class,
+        \TimetablePusher\Console\Commands\ClearBeanstalkdQueue::class,
     ];
 
     /**
