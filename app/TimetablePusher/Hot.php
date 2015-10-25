@@ -4,6 +4,7 @@ namespace TimetablePusher\TimetablePusher;
 
 use Carbon\Carbon;
 use DateTime;
+use Log;
 
 class Hot
 {
@@ -200,6 +201,9 @@ class Hot
 
             $days[] = $day;
         }
+
+        Log::info(json_encode($days));
+        die();
 
         return $days;
     }
