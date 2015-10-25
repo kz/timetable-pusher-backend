@@ -55,9 +55,10 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
         // Add pin ID to pin
         $this->pin['id'] = $dbPin->pin_id;
 
+        Log::debug($this->pin);
+
         $client = new Client(['base_uri' => 'https://timeline-api.getpebble.com/v1/user/pins/']);
         try {
-            Log::debug($this->pin);
             $response = $client->request('PUT', $dbPin->pin_id, [
                 'json' => $this->pin,
                 'headers' => [
