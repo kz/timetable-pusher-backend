@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\Middleware;
 use Log;
 use TimetablePusher\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
@@ -55,15 +56,23 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
         // Add pin ID to pin
         $this->pin['id'] = $dbPin->pin_id;
 
-        Log::alert($this->pin);
-
         $client = new Client(['base_uri' => 'https://timeline-api.getpebble.com/v1/user/pins/']);
+
+        // Grab the client's handler instance.
+        $clientHandler = $client->getConfig('handler');
+        // Create a middleware that echoes parts of the request.
+        $tapMiddleware = Middleware::tap(function ($request) {
+            Log::error($request->getBody());
+            // {"foo":"bar"}
+        });
+
         try {
             $response = $client->request('PUT', $dbPin->pin_id, [
                 'json' => $this->pin,
                 'headers' => [
                     'X-User-Token' => $this->timelineToken,
                 ],
+                'handler' => $tapMiddleware($clientHandler)
             ]);
 
             if ($response->getStatusCode() === 200) {
