@@ -6,6 +6,10 @@ $(function () {
      */
     var hotData = $('#hotData');
     createHot(JSON.parse(hotData.prop('value')));
+
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
+    });
 });
 
 function submitForm() {
