@@ -38,12 +38,12 @@ class AuthenticateApiV1
      */
     public function handle($request, Closure $next)
     {
-        if ($userId = $this->user->authenticateApiV1($request->header('Authorization')) !== false) {
-            $this->auth->loginUsingId($userId);
+
+        if ($this->user->authenticateApiV1($request->header('Authorization')) !== false) {
+            $this->auth->loginUsingId($this->user->authenticateApiV1($request->header('Authorization')));
         } else {
             return response('Invalid API token.', 401);
         }
-
         return $next($request);
     }
 }

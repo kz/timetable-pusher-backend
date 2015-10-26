@@ -20,7 +20,7 @@ class Job
 
     }
 
-    public function pushPins($timetableId, $timelineToken, $pins)
+    public function pushPins($timetableId, $timelineToken, $pins, $userId)
     {
         try {
             $timetable = Timetable::findOrFail($timetableId);
@@ -29,7 +29,7 @@ class Job
         }
 
         $job = new Entities\Job();
-        $job->user_id = Auth::user()->id;
+        $job->user_id = $userId;
         $job->type = 'create';
         $job->timetable_id = $timetable->id;
         $job->save();
@@ -49,9 +49,10 @@ class Job
         $job->update();
     }
 
-    public function deletePins($timelineToken, $pins)
+    public function deletePins($timelineToken, $pins, $userId)
     {
         $job = new Entities\Job();
+        $job->user_id = $userId;
         $job->type = 'delete';
         $job->save();
 

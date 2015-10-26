@@ -84,7 +84,7 @@ class JobController extends Controller
         }
 
         $job = new Job();
-        $job->pushPins($timetable->id, request()->input('timeline_token'), $pins);
+        $job->pushPins($timetable->id, request()->input('timeline_token'), $pins, Auth::user()->id);
 
         return response()->json('All pins sent.', 200);
     }
@@ -125,7 +125,7 @@ class JobController extends Controller
         }
 
         $job = new Job();
-        $job->deletePins(request()->input('timeline_token'), $allPins);
+        $job->deletePins(request()->input('timeline_token'), $allPins, Auth::user()->id);
 
         return response()->json('Deletion request sent.', 200);
     }
