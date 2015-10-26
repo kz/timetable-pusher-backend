@@ -40,7 +40,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function handle(Log $log)
+    public function handle()
     {
         // Store new pin in DB, automatically generating a pin ID
         $dbPin = new Pin();
@@ -67,7 +67,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
                 $dbPin->status = 'successful';
             } else {
                 $dbPin->status = 'failed';
-                $log->error('Pin Failure - ' . $dbPin->id . ' due to ' . $response->getStatusCode() . ' - ' . $response->getBody());
+                Log::error('Pin Failure - ' . $dbPin->id . ' due to ' . $response->getStatusCode() . ' - ' . $response->getBody());
             }
 
             $dbPin->status_code = $response->getStatusCode();
@@ -78,7 +78,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
             $responseCode = $e->getResponse()->getStatusCode();
             $responseBody = $e->getResponse()->getBody();
 
-            $log->error('Pin Failure - API - ' . $dbPin->id . ' due to ' . $responseCode . ' - ' . $responseBody);
+            Log::error('Pin Failure - API - ' . $dbPin->id . ' due to ' . $responseCode . ' - ' . $responseBody);
 
             $dbPin->status = 'failed';
             $dbPin->status_code = $responseCode;
@@ -89,7 +89,7 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
             $responseCode = $e->getResponse()->getStatusCode();
             $responseBody = $e->getResponse()->getBody();
 
-            $log->error('Pin Failure - Network - ' . $dbPin->id . ' due to ' . $responseCode . ' - ' . $responseBody);
+            Log::error('Pin Failure - Network - ' . $dbPin->id . ' due to ' . $responseCode . ' - ' . $responseBody);
 
             $dbPin->status = 'failed';
             $dbPin->status_code = $responseCode;
