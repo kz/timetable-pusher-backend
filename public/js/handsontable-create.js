@@ -8,6 +8,10 @@ $(function() {
     if (typeof hotData.prop('value') !== 'undefined' && hotData.prop('value') != "") {
         createHot(JSON.parse(hotData.prop('value')));
     }
+
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
+    });
 });
 
 function generateTimetable() {
