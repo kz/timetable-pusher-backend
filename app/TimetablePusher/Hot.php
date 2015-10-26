@@ -184,8 +184,6 @@ class Hot
                     ->minute($startTime->minute)
                     ->subMinutes($offsetFromUTC);
 
-                dd($lessonDateTime);
-
                 $day[] = [
                     'id' => '',
                     'time' => $lessonDateTime->format('Y-m-d\TH:i:s\Z'),
