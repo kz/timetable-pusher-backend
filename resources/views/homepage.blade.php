@@ -12,7 +12,7 @@
                     timetables to your watch.</h5>
             </div>
             <div class="row center">
-                <a href="#" id="download-button"
+                <a href="https://apps.getpebble.com/en_US/application/562a89497480835e51000090" id="download-button"
                    class="btn-large waves-effect waves-light red">1. Download the App</a>
                 <a href="/dashboard" id="download-button"
                    class="btn-large waves-effect waves-light red">2. Configure your Timetable</a>
