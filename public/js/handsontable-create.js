@@ -22,8 +22,8 @@ function generateTimetable() {
     if (typeof lessons !== 'number' || isNaN(lessons)) {
         alert('You must specify a valid number.');
         return false;
-    } else if (lessons < 1 || lessons > 10) {
-        alert('You can only specify up to 10 lessons per day.');
+    } else if (lessons < 1 || lessons > 14) {
+        alert('You can only specify up to 14 lessons per day.');
         return false;
     }
 

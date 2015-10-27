@@ -17,7 +17,7 @@ class Hot
     protected $mondayColumnNum = 3;
     protected $totalColumnCount = 10;
 
-    protected $maxPeriodsAllowed = 10;
+    protected $maxPeriodsAllowed = 14;
 
     public function __construct()
     {

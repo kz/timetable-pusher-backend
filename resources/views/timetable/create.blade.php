@@ -18,7 +18,7 @@
         <div class="row">
             <div class="card-panel black-text">
                 <p>Enter the amount of lessons you have per day below:
-                    <input value="7" id="lessons" type="number" min="1" max="10" class="validate"/>
+                    <input value="7" id="lessons" type="number" min="1" max="14" class="validate"/>
                 </p>
                 <button class="waves-effect waves-light btn" onclick="generateTimetable()"
                         id="generate-timetable-button">Generate Timetable
