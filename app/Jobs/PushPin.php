@@ -3,6 +3,7 @@
 namespace TimetablePusher\Jobs;
 
 use Carbon\Carbon;
+use DB;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
@@ -42,6 +43,8 @@ class PushPin extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::connection()->reconnect();
+
         // Store new pin in DB, automatically generating a pin ID
         $dbPin = new Pin();
         $dbPin->job_id = $this->jobId;

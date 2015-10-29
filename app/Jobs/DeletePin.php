@@ -2,6 +2,7 @@
 
 namespace TimetablePusher\Jobs;
 
+use DB;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
@@ -38,6 +39,8 @@ class DeletePin extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::connection()->reconnect();
+
         $pin = Pin::findOrFail($this->pinId);
 
         $client = new Client(['base_uri' => 'https://timeline-api.getpebble.com/v1/user/pins/']);
