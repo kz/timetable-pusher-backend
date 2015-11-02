@@ -24,7 +24,7 @@ To install this on your own machine:
 ## Credits
 
 - [Kelvin Zhang](https://github.com/kz)
-- [All Contributors][link-contributors]
+- [All Contributors](link-contributors)
 
 ## License
 
