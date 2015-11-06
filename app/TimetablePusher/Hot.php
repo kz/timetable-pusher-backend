@@ -182,7 +182,7 @@ class Hot
                 $lessonDateTime = $carbon->addDays($dayNum - $this->mondayColumnNum)
                     ->hour($startTime->hour)
                     ->minute($startTime->minute)
-                    ->addMinutes($offsetFromUTC);
+                    ->subMinutes($offsetFromUTC);
 
                 $day[] = [
                     'id' => '',
