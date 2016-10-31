@@ -69,7 +69,7 @@ class JobController extends Controller
         // Create pins
         $hot = new Hot();
         $hot->parseJson($timetable->data);
-        $pins = $hot->outputHotFormatToPinFormat($weekBeginning, $request->input('offset_from_utc'));
+        $pins = $hot->outputHotFormatToPinFormat($weekBeginning, $request->input('offset_from_utc'), $timetable->has_period_numbers);
 
         $pinFormatter = new PinFormatter($pins);
 

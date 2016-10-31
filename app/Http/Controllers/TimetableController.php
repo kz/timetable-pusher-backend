@@ -48,6 +48,7 @@ class TimetableController extends Controller
         $timetable->user_id = Auth::user()->id;
         $timetable->name = $request->input('name');
         $timetable->data = $hot->stringifyHotFormatArray();
+        $timetable->has_period_numbers = $request->has('hasPeriodNumbers');
         $timetable->save();
 
         return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been created.']]);
@@ -133,6 +134,7 @@ class TimetableController extends Controller
 
         $timetable->name = $request->input('name');
         $timetable->data = $hot->stringifyHotFormatArray();
+        $timetable->has_period_numbers = $request->has('hasPeriodNumbers');
         $timetable->update();
 
         return redirect('/timetable/' . $timetable->id)->with(['success' => ['Your timetable has successfully been updated.']]);

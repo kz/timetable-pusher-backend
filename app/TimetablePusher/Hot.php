@@ -149,9 +149,10 @@ class Hot
     /**
      * @param Carbon $weekBeginning
      * @param int $offsetFromUTC
+     * @param bool $hasPeriodNumbers
      * @return array
      */
-    public function outputHotFormatToPinFormat(Carbon $weekBeginning, $offsetFromUTC = 0)
+    public function outputHotFormatToPinFormat(Carbon $weekBeginning, $offsetFromUTC = 0, $hasPeriodNumbers = true)
     {
         $hotFormat = $this->hotFormatArray; // $hotFormat[period][day]
 
@@ -190,7 +191,7 @@ class Hot
                     'duration' => $startTime->diffInMinutes($endTime),
                     'layout' => [
                         'type' => 'calendarPin',
-                        'title' => $hotPeriod . ' - ' . $hotName,
+                        'title' => (true === $hasPeriodNumbers) ? $hotPeriod . ' - ' . $hotName : $hotName,
                     ]
                 ];
 

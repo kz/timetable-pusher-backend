@@ -40,6 +40,10 @@
                         <label for="name">Name</label>
                     </div>
                     </p>
+                    <p>
+                        <input type="checkbox" class="filled-in" name="hasPeriodNumbers" id="hasPeriodNumbers" value="true" {{ $timetable->has_period_numbers ? 'checked' : '' }}/>
+                        <label for="hasPeriodNumbers">Include period numbers (e.g., Timeline has "1 - Maths" instead of "Maths")</label>
+                    </p>
                     <input type="hidden" id="hotData" name="hotData" value="{{ old('hotData', $timetable->data) }}"/>
                 </form>
                 <button class="waves-effect waves-light btn" onclick="submitForm()"
