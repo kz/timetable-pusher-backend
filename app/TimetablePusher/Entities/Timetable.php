@@ -51,4 +51,13 @@ class Timetable extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'has_period_numbers' => 'boolean',
+    ];
 }
