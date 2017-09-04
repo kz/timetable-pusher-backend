@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: TimetablePusher
-        psr4_prefix: TimetablePusher
-        src_path: app
