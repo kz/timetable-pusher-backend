@@ -33,16 +33,17 @@ class User extends Authenticatable
         return $this->hasMany(Timetable::class);
     }
 
-    // TODO: Change function name and add comments
-    public static function authenticateApiV1($token)
+    /**
+     * Gets a user by token (or null if the user does not exist)
+     *
+     * @param $token
+     * @return User | null
+     */
+    public static function getUserByToken($token)
     {
-        // Get plain token
-        $token = str_replace('Bearer:', '', $token);
-        $token = str_replace(' ', '', $token);
+        $user = DB::table('users')->where('api_token', $token)->first();
 
-        // TODO: Think about a better way to do this
-        $query = DB::table('users')->where('api_token', $token);
-        return $query->count() === 1 ? $query->first()->id : false;
+        return $user ?: null;
     }
 
     public static function boot()
