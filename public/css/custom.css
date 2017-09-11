@@ -1,0 +1,20 @@
+html {
+    /* Override default colors */
+    background-color: #333;
+    color: white;
+}
+
+#download-button {
+    margin-bottom: 10px;
+}
+
+/* Make the footer sticky */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
