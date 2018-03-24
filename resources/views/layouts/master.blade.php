@@ -42,9 +42,9 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5>About Timetable Pusher</h5>
+                <h5>Note on Pebble Server Shutdown</h5>
 
-                <p class="grey-text text-lighten-4">Timetable Pusher is a Pebble app which pushes your class timetables to your watch.</p>
+                <p class="grey-text text-lighten-4">Timetable Pusher aims to work for at least a year after Pebble servers are shut down by switching to the (volunteer-driven) Rebble project's servers after the end of June 2018. You can find more details <a href="http://rebble.io/2018/02/15/rebble-web-services.html">here</a>.</p>
             </div>
         </div>
     </div>
