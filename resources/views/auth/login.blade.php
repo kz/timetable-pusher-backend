@@ -35,6 +35,8 @@
                 </button>
             </p>
 
+            <p>Forgot your password? Reset it <a href="/password/email">here</a>.</p>
+
         </form>
 
     </div>
