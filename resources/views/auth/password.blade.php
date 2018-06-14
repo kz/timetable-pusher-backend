@@ -8,7 +8,6 @@
 
         <form method="POST" action="/password/email">
             {!! csrf_field() !!}
-            <input type="hidden" name="token" value="{{ $token }}">
 
             <p>
 
