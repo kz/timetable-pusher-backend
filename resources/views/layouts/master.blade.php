@@ -77,8 +77,8 @@
 
                 <p class="grey-text text-lighten-4">Timetable Pusher aims to work for at least a year after Pebble servers are shut down by switching to the (volunteer-driven) Rebble project's servers after the end of June 2018. You can find more details <a href="http://rebble.io/2018/02/15/rebble-web-services.html">here</a>.</p>
                 <div id="mc_embed_signup" style="background: inherit !important; font: inherit !important; width: 530px !important;">
-                    <form action="https://timetablepush.us18.list-manage.com/subscribe/post?u=7eb8df044a36724255d172f9d&amp;id=76fb74eb4a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                        <div id="mc_embed_signup_scroll" style="padding: 0 !important;">
+                    <form action="https://timetablepush.us18.list-manage.com/subscribe/post?u=7eb8df044a36724255d172f9d&amp;id=76fb74eb4a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate  style="padding: 0 !important;">
+                        <div id="mc_embed_signup_scroll">
                             <p class="grey-text text-lighten-4" style="font-size:16px !important;">Subscribe to important Timetable Pusher updates</p>
                             <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
                             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7eb8df044a36724255d172f9d_76fb74eb4a" tabindex="-1" value=""></div>
