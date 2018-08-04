@@ -26,6 +26,9 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        return response()->json(['error' => true, 'messages' => ['pebble', 'Pebble server no longer operational.']], 503);
+        
+        /*
         // Validate API input
         $validator = Validator::make($request->all(), [
             'timetable_id' => 'required|integer',
@@ -87,6 +90,7 @@ class JobController extends Controller
         $job->pushPins($timetable->id, request()->input('timeline_token'), $pins, Auth::user()->id);
 
         return response()->json('All pins sent.', 200);
+        */
     }
 
     /**
@@ -98,6 +102,9 @@ class JobController extends Controller
      */
     public function destroy(Request $request)
     {
+        return response()->json(['error' => true, 'messages' => ['pebble', 'Pebble server no longer operational.']], 503);
+        
+        /*
         // Validate API input
         $validator = Validator::make($request->all(), [
             'timeline_token' => 'required|string',
@@ -128,5 +135,6 @@ class JobController extends Controller
         $job->deletePins(request()->input('timeline_token'), $allPins, Auth::user()->id);
 
         return response()->json('Deletion request sent.', 200);
+        /*
     }
 }
